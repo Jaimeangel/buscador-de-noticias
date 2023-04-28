@@ -15,7 +15,7 @@ function NoticiasProvider({children}) {
 
   useEffect(()=>{
     const getNoticias=async ()=>{
-      const url=`https://newsapi.org/v2/top-headlines?category=${categoria}&apiKey=${import.meta.env.VITE_API_KEY}`
+      const url=`https://newsapi.org/v2/top-headlines?country=us&category=${categoria}&apiKey=${import.meta.env.VITE_API_KEY}`
       const {data:{articles}}= await axios(url)
       setNoticias(articles)
     }
@@ -26,7 +26,8 @@ function NoticiasProvider({children}) {
     <NoticiasContext.Provider
       value={{
         categoria,
-        handleSetCategoria
+        handleSetCategoria,
+        noticias
       }}
     >
         {children}
