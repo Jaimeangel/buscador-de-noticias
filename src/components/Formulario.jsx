@@ -1,11 +1,6 @@
-import {
-    FormControl,
-    InputLabel,
-    Select,
-    MenuItem,
-    Button,
-    Box
-} from '@mui/material';
+import {FormControl,InputLabel,Select,MenuItem,Button,Box} from '@mui/material';
+import useNoticiasContext from '../hooks/useNoticiasContext';
+
 
 const CATEGORIAS = [
   { value: 'general', label: 'General'},
@@ -18,39 +13,44 @@ const CATEGORIAS = [
 ]
 
 function Formulario() {
-  return (
-    <form>
-        <FormControl fullWidth>
-            <InputLabel>Categoria</InputLabel>
-            <Select
-                label='Categoria'
-            >
-                {
-                    CATEGORIAS.map((categoria)=>(
-                        <MenuItem
-                            key={categoria.value}
-                            value={categoria.value}
-                        >
-                            {categoria.label}
-                        </MenuItem>
-                    ))
-                }
-            </Select>
-            <Box
-                sx={{
-                    marginTop:2
-                }}
-            >
-                <Button
-                    fullWidth
-                    variant="contained"
+
+    const {categoria,handleSetCategoria}=useNoticiasContext()
+
+    return (
+        <form>
+            <FormControl fullWidth>
+                <InputLabel>Categoria</InputLabel>
+                <Select
+                    label='Categoria'
+                    value={categoria}
+                    onChange={handleSetCategoria}
                 >
-                    Buscar Noticias
-                </Button>
-            </Box>
-        </FormControl>
-    </form>
-  )
+                    {
+                        CATEGORIAS.map((categoria)=>(
+                            <MenuItem
+                                key={categoria.value}
+                                value={categoria.value}
+                            >
+                                {categoria.label}
+                            </MenuItem>
+                        ))
+                    }
+                </Select>
+                <Box
+                    sx={{
+                        marginTop:2
+                    }}
+                >
+                    <Button
+                        fullWidth
+                        variant="contained"
+                    >
+                        Buscar Noticias
+                    </Button>
+                </Box>
+            </FormControl>
+        </form>
+    )
 }
 
 export default Formulario;
